@@ -1,0 +1,21 @@
+server:
+  port: 9004
+
+spring:
+  application:
+    ###服务的名称
+    name: pitch-order
+  cloud:
+    nacos:
+      discovery:
+        ###nacos注册地址
+        server-addr: 192.168.227.128:1111
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+
+#开启feign对Sentinel的支持
+feign:
+  sentinel:
+    enabled: true

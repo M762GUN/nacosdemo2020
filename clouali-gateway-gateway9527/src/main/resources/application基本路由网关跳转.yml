@@ -1,0 +1,24 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.227.128:1111
+    gateway:
+      routes: #路由数组[路由就是指当请求满足什么条件的时候跳转到哪个服务上
+        - id: product_routes1 # 当前路由的标识，要求唯一,moren UUID # 路由的ID，没有固定规则但要求唯一，价面议配合服务名
+          #uri: http://127.0.0.1:9001 #请求到要转发到的地址  从9527端口地址跳转到这个服务的地址
+          uri: http://localhost:9001 # lb指的是负载均衡，后面跟的是具体微服务在nacos中的标识
+          predicates: #断言(就是路由注意转发要满足的东西)
+            - Path=/demoNacos/nacos1/** # 当请求路径满足Path指定的规则时，才进行和路由转发
+
+        - id: product_routes2 # 当前路由的标识，要求唯一,moren UUID # 路由的ID，没有固定规则但要求唯一，价面议配合服务名
+            #uri: http://127.0.0.1:9001 #请求到要转发到的地址  从9527端口地址跳转到这个服务的地址
+          uri: http://localhost:9001 # lb指的是负载均衡，后面跟的是具体微服务在nacos中的标识
+          predicates: #断言(就是路由注意转发要满足的东西)
+            - Path=/demoNacos/nacos2/**
+

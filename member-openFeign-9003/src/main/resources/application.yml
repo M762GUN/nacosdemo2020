@@ -1,0 +1,11 @@
+spring:
+  application:
+    ###服务的名称
+    name: pitch-member
+  cloud:
+    nacos:
+      discovery:
+        ###nacos注册地址
+        server-addr: 192.168.227.128:1111
+server:
+  port: 9003

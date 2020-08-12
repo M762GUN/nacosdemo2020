@@ -1,0 +1,18 @@
+server:
+  port: 83
+
+spring:
+  application:
+    name: nacos-consumer83
+  zipkin:
+    base-url: http://localhost:9411
+    sleuth:
+      sampler:
+      probability: 1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.227.128:1111
+
+service-url:
+  nacos-user-service: http://cluster

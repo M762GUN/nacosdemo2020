@@ -1,0 +1,27 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.227.128:1111
+    gateway:
+      discovery:
+        locator:
+          enabled: true #核心1：开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes:
+        - id: product_routes1
+          uri: lb://nacos-provider #核心2：lb开启负载，后面跟上对应服务名
+          predicates:
+            - Path=/demoNacos/nacos1/**
+            #- Before=2020-08-07T13:37:18.719+08:00
+            - After=2020-08-07T13:37:18.719+08:00
+            - Method=GET
+        - id: product_routes2
+          uri: lb://nacos-provider
+          predicates:
+            - Path=/demoNacos/nacos2/**
+
